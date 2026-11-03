@@ -4,6 +4,8 @@ Ryan O'Neil — Rco220002
 
 **Does one model trained across many stocks beat learning them one at a time?**
 
+📄 Full write-up: [Project Report (PDF)](docs/Project_Report.pdf)
+
 A Long Short-Term Memory network written by hand in NumPy and used to predict
 next-day movement for 12 S&P 500 companies. No deep learning libraries are
 used anywhere. The cell, the forward pass, backpropagation through time and
@@ -68,6 +70,7 @@ knowledge is learned and there is nothing to forget. Volatility is.
 │   │                       full config and results
 │   └── log_old_format.txt  early runs in the original log format
 ├── docs/
+│   ├── Project_Report.pdf          the final written report (IEEE format)
 │   └── Project_Status_Report.pdf
 └── requirements.txt
 ```
