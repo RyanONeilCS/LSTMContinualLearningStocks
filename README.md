@@ -68,8 +68,7 @@ knowledge is learned and there is nothing to forget. Volatility is.
 │   │                       full config and results
 │   └── log_old_format.txt  early runs in the original log format
 ├── docs/
-│   ├── Project_Status_Report.pdf
-│   └── report_notes.md     notes and outline for the written report
+│   └── Project_Status_Report.pdf
 └── requirements.txt
 ```
 

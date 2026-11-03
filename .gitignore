@@ -18,3 +18,6 @@ Thumbs.db
 desktop.ini
 .vscode/
 .idea/
+
+# Personal notes, kept local only
+docs/report_notes.md
