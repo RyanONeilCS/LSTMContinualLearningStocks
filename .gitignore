@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Downloaded on first run from RyanONeilCS/MachineLearningProjectData
+data_cache/
+
+# Course submission artifacts / instructor material
+*.zip
+Rco220002_AllCode.txt
+Project Description.pdf
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
