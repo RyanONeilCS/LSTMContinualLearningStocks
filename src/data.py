@@ -25,8 +25,11 @@ import requests
 #Public location of the dataset and no account is needed to reach it
 BASE_URL = "https://raw.githubusercontent.com/RyanONeilCS/MachineLearningProjectData/main"
 
+#Repo root, one level above src, so paths work from any working directory
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 #Local folder the files are cached in
-CACHE_DIR = "data_cache"
+CACHE_DIR = os.path.join(ROOT, "data_cache")
 
 #Twelve companies in sector pairs so the forgetting matrix is readable
 TICKERS = ["AAPL", "MSFT", "NVDA", "JPM", "GS", "XOM",

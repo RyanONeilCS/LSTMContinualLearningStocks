@@ -1,8 +1,8 @@
 """
 Entry point for the LSTM stock-forecasting experiments.
 
-Run with:
-    python main.py
+Run from the repo root with:
+    python src/main.py
 """
 
 import os
@@ -12,6 +12,12 @@ import matplotlib.pyplot as plt
 
 import data
 from lstm import parameters, forward, train
+
+#Outputs live at the repo root so they are found no matter where this is run from
+LOG_PATH = os.path.join(data.ROOT, "results", "log.txt")
+FIG_DIR = os.path.join(data.ROOT, "figures")
+os.makedirs(os.path.dirname(LOG_PATH), exist_ok = True)
+os.makedirs(FIG_DIR, exist_ok = True)
 
 #Everything that changes a result goes here so the whole dict can be logged
 CONFIG = {
@@ -118,7 +124,7 @@ def evaluate(y_pred: np.ndarray, y_true: np.ndarray, train_mean: float):
 
 #Append one run to the log as a numbered block
 #Number carries on from whatever is already in the file
-def log_run(config: dict, results: dict, note: str = "", path: str = "log.txt"):
+def log_run(config: dict, results: dict, note: str = "", path: str = LOG_PATH):
 
     number = 1
     if os.path.exists(path):
@@ -246,7 +252,7 @@ incremental_results = {
 log_run(CONFIG, incremental_results, "incremental model, one company per stage")
 
 #Matrix is too wide for the block format so it goes underneath
-with open("log.txt", "a", encoding = "utf-8") as f:
+with open(LOG_PATH, "a", encoding = "utf-8") as f:
     f.write("  Skill matrix, rows are stages and columns are companies\n")
     f.write("       " + "".join(f"{t:>8s}" for t in CONFIG["tickers"]) + "\n")
     for stage, ticker in enumerate(CONFIG["tickers"]):
@@ -260,7 +266,7 @@ plt.plot(base_history)
 plt.xlabel("Epoch")
 plt.ylabel("Training MSE")
 plt.title("Training loss, base run")
-plt.savefig("loss_curve.png", dpi = 150, bbox_inches = "tight")
+plt.savefig(os.path.join(FIG_DIR, "loss_curve.png"), dpi = 150, bbox_inches = "tight")
 plt.close()
 
 #Figure 2 skill of every setting
@@ -274,7 +280,7 @@ plt.xticks(range(len(labels)), labels, rotation = 45, ha = "right")
 plt.ylabel("Skill ratio (lower is better)")
 plt.title("Skill across every hyperparameter setting")
 plt.legend()
-plt.savefig("sweep_skill.png", dpi = 150, bbox_inches = "tight")
+plt.savefig(os.path.join(FIG_DIR, "sweep_skill.png"), dpi = 150, bbox_inches = "tight")
 plt.close()
 
 #Figure 3 forgetting matrix heatmap
@@ -286,7 +292,7 @@ plt.yticks(range(len(CONFIG["tickers"])), [f"after {t}" for t in CONFIG["tickers
 plt.xlabel("Tested on")
 plt.ylabel("Training stage")
 plt.title("Skill ratio per company after each incremental stage")
-plt.savefig("forgetting_matrix.png", dpi = 150, bbox_inches = "tight")
+plt.savefig(os.path.join(FIG_DIR, "forgetting_matrix.png"), dpi = 150, bbox_inches = "tight")
 plt.close()
 
 #Figure 4 does skill drift as companies are added
@@ -299,7 +305,7 @@ plt.xlabel("Companies trained on so far")
 plt.ylabel("Skill ratio (lower is better)")
 plt.title("Skill as companies are added one at a time")
 plt.legend()
-plt.savefig("skill_vs_stages.png", dpi = 150, bbox_inches = "tight")
+plt.savefig(os.path.join(FIG_DIR, "skill_vs_stages.png"), dpi = 150, bbox_inches = "tight")
 plt.close()
 
-print("saved loss_curve.png, sweep_skill.png, forgetting_matrix.png, skill_vs_stages.png")
+print("saved to figures/ loss_curve.png, sweep_skill.png, forgetting_matrix.png, skill_vs_stages.png")

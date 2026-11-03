@@ -5,7 +5,7 @@ Compares every analytical gradient against a central finite difference
 If BPTT is right the two numbers agree to about 1e-7
 
 Run with
-    python test_gradients.py
+    python src/test_gradients.py
 """
 
 from __future__ import annotations
